@@ -18,11 +18,11 @@ class Actor < ApplicationRecord
   validates :description, presence: true, length: { in: 5..100 }
   validate :validate_date_of_birth
 
-   def self.search(search)
-    where("name LIKE ?", "%#{search}%" ) 
+  def self.search(search)
+    where("name LIKE ?", "%#{search}%" )
     #where("description LIKE ?", "%#{search}%")
   end
-  
+
   def validate_date_of_birth
     errors.add("data_of_birth", "(Dates from future not allowed!)") unless date_of_birth < Time.now
   end
