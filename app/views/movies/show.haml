@@ -1,0 +1,20 @@
+.container
+  %br/
+  .jumbotron
+    %h1= @movie.name
+    %p
+      %b> Rating
+      \: #{@movie.rating}
+    %p
+      %b> Release Date
+      \: #{@movie.release_date}
+    %p
+      %b> Description
+      \: #{@movie.description}
+    %p= link_to 'Delete', movie_path(@movie), |
+        method: :delete,                    |
+        data: { confirm: 'Are you sure?' }, |
+        class: 'btn btn-danger'             |
+    %p= link_to 'Edit', edit_movie_path(@movie), class: 'btn btn-warning'
+    %hr/
+    = link_to 'Home', movies_path
