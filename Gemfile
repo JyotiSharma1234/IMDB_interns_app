@@ -32,7 +32,7 @@ gem 'jquery-rails'
 
 gem 'bootstrap', '~> 4.0.0'
 
-gem 'haml'
+gem 'haml-rails', "~> 1.0"
 
 gem 'rails-controller-testing'
 
