@@ -18,4 +18,9 @@ class Movie < ApplicationRecord
   validates :name, :release_date, :description, :rating, presence: { message: 'Field cannot be empty'}
   validates :description, length: { in: 6...100 }
   validates_inclusion_of :rating, :in => 0..5
+  
+  def self.search(search)
+    where("name LIKE ?", "%#{search}%" ) 
+    #where("description LIKE ?", "%#{search}%")
+  end
 end
