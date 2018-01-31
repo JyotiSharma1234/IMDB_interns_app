@@ -1,7 +1,7 @@
 class MoviesController < ApplicationController
   def new
     @movie = Movie.new
-    Article.search(params[:id])
+    Movie.search(params[:id])
   end
 
   def create
