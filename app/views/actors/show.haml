@@ -13,6 +13,12 @@
         data: { confirm: 'Are you sure?' }, |
         class: 'btn btn-danger'             |
     %p= link_to 'Edit', edit_actor_path(@actor), class: 'btn btn-warning'
+    %h4 Movies
+    %table.table
+      - @actor.casts.each do |movie|
+        %tr
+          %td= movie['name']
+    %hr/
     %hr/
     = link_to 'All actors', actors_path, class: 'btn btn-primary'
     = link_to 'Home', root_path, class: 'btn btn-primary'
