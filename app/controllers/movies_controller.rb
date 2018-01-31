@@ -4,7 +4,7 @@ class MoviesController < ApplicationController
   end
 
   def create
-    @movie = User.new(movie_params)
+    @movie = Movie.new(movie_params)
     if @movie.save
       redirect_to root_path
     else
@@ -21,7 +21,7 @@ class MoviesController < ApplicationController
   end
 
   def show
-    @movie = Movie.new(movie_params)
+    @movie = Movie.find(params[:id])
     respond_to do |format|
       format.html
       format.json  { render :json => @movie }
@@ -29,20 +29,20 @@ class MoviesController < ApplicationController
   end
 
   def edit
-    @movie = Movie.new(movie_params)
+    @movie = Movie.find(params[:id])
   end
 
   def update
-    @movie = User.find(params[:id])
-    if @movie.update(user_params)
+    @movie = Movie.find(params[:id])
+    if @movie.update(movie_params)
       redirect_to @movie
     else
       render 'edit'
     end
   end
-  
+
   def destroy
-    @movie = Movie.new(movie_params)
+    @movie = Movie.find(params[:id])
     @movie.destroy
     redirect_to root_path
   end
