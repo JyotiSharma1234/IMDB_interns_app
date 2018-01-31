@@ -2,9 +2,18 @@
   .jumbotron
     %h1 All actors:
     = link_to "Add new actor", new_actor_path, class: 'btn btn-success'
+    %br
+    %br
+    %h3 Search Actor
+    = form_for(actors_path, :method => "get", id: "search-form") do
+      = text_field_tag :search, params[:search], placeholder: "Search Actor"
+      = submit_tag "Search"
+    - unless @actors.present?
+      %p
+      There are no actor with #{params[:search]} name.    
     %table.table
       %th Name
-      %th #movies
+      %th Number of movies
       - @actors.each do |actor|
         %tr
           %td= link_to(actor.name, actor_path(actor))

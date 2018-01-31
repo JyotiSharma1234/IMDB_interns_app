@@ -1,6 +1,15 @@
 class ActorsController < ApplicationController
   def index
     @actors = Actor.all
+    if params[:search]
+      @actors = Actor.search(params[:search]).order("created_at DESC")
+    else
+      @actors = Actor.all.order('created_at DESC')
+    end
+    respond_to do |format|
+      format.html
+      format.json  { render :json => @movies }
+    end
   end
 
   def show

@@ -1,7 +1,6 @@
 .container
-  .card
-    .card-block
-      %h4.card-title Edit Actor: @actor.name
-      = render 'form'
-      %hr/
-      = link_to 'Home', root_path
+  .jumbotron
+    %h4.card-title Edit Actor: #{@actor.name}
+    = render 'form'
+    %hr/
+    = link_to 'Home', root_path, class: 'btn btn-primary'
