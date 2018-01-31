@@ -1,8 +1,7 @@
 .container
-  .card
-    .card-block
-      .container
-        %h4.card-title Add actor
-        = render 'form'
-        %hr/
-        = link_to 'Home', root_path
+  .jumbotron
+    .container
+      %h4.card-title Add actor
+      = render 'form'
+      %hr/
+      = link_to 'Home', root_path, class: 'btn btn-primary'
