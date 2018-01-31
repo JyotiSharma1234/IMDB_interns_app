@@ -1,0 +1,18 @@
+.container
+  %br/
+  .jumbotron
+    %h1= @actor.name
+    %p
+      %b> #movies
+      \: #{@actor.casts.length}
+    %p
+      %b> Description
+      \: #{@actor.description}
+    %p= link_to 'Delete', actor_path(@actor), |
+        method: :delete,                    |
+        data: { confirm: 'Are you sure?' }, |
+        class: 'btn btn-danger'             |
+    %p= link_to 'Edit', edit_actor_path(@actor), class: 'btn btn-warning'
+    %hr/
+    = link_to 'All actors', actors_path, class: 'btn btn-primary'
+    = link_to 'Home', root_path, class: 'btn btn-primary'

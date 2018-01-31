@@ -1,1 +1,17 @@
-
+.container
+  .jumbotron
+    %h1 All actors:
+    = link_to "Add new actor", new_actor_path, class: 'btn btn-success'
+    %table.table
+      %th Name
+      %th #movies
+      - @actors.each do |actor|
+        %tr
+          %td= link_to(actor.name, actor_path(actor))
+          %td= actor.casts.length
+          %td= link_to 'Delete', actor_path(actor),  |
+              method: :delete,                    |
+              data: { confirm: 'Are you sure?' }, |
+              class: "btn btn-danger"             |
+          %td= link_to 'Edit', edit_actor_path(actor), class: 'btn btn-warning'
+    = link_to 'Home', root_path, class: 'btn btn-primary'

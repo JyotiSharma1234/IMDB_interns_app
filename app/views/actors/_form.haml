@@ -1,0 +1,21 @@
+= form_with model: @actor, local: true do |form|
+  - if @actor.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@actor.errors.count, "error")
+        prohibited
+        this movie from being saved:
+      %ul
+        - @actor.errors.full_messages.each do |msg|
+          %li= msg
+  %p
+    = form.label :name
+    = form.text_field :name
+  %p
+    = form.label :description
+    = form.text_area :description
+  %p
+    = form.label :date_of_birth
+    = form.date_field :date_of_birth
+  %p
+    = form.submit
