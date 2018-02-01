@@ -15,6 +15,7 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.all
+
     if params[:search]
       @movies = Movie.search(params[:search]).order("created_at DESC")
     else
@@ -28,6 +29,7 @@ class MoviesController < ApplicationController
 
   def show
     @movie = Movie.find(params[:id])
+    @actors = Actor.all
     respond_to do |format|
       format.html
       format.json  { render :json => @movie }

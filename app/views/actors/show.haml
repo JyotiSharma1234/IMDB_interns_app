@@ -14,6 +14,7 @@
         class: 'btn btn-danger'             |
     %p= link_to 'Edit', edit_actor_path(@actor), class: 'btn btn-warning'
     %h4 Movies
+    
     = link_to 'Add', nil, class: 'btn btn-sml btn-success'
     %table.table
       - @actor.movies.each do |movie|
