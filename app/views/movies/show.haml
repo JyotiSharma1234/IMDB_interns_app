@@ -23,7 +23,7 @@
           - @actors.each do |actor|
             %option{:value => actor.id}= actor.name
       %p
-        =form.submit "Update"
+        =form.submit "Add Actor"
     %table.table
       - @movie.actors.each do |cast|
         %tr
