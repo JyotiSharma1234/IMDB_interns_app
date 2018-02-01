@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Actor do
-  context 'Actor validation' do
-    it 'should valid actor' do
+  context 'Actor' do
+    it 'is a valid actor' do
       actor = FactoryGirl.create(:actor)
       expect(actor.valid?).to eq(true)
     end
   end
 
-  context 'name validation' do
+  context 'name' do
     it 'has invalid name' do
       actor = FactoryGirl.build(:actor, :name => '')
       actor.valid?
@@ -16,7 +16,7 @@ RSpec.describe Actor do
     end
   end
 
-  context 'birth date validation' do
+  context 'birth date' do
     it 'has invalid birth date' do
       actor = FactoryGirl.build(:actor, :date_of_birth => '')
       actor.valid?
@@ -24,7 +24,7 @@ RSpec.describe Actor do
     end
   end
 
-  context 'description validation' do
+  context 'description' do
     it 'has invalid description' do
       actor = FactoryGirl.build(:actor, :description => 'm')
       actor.valid?
@@ -33,9 +33,15 @@ RSpec.describe Actor do
   end
 
   context 'search' do
-    it 'should return all matched actors' do
+    it 'returns all matched actors' do
       actor = FactoryGirl.create(:actor, name: 'Pooja')
       expect(Actor.search('Pooja')).to eq([actor])
+    end
+  end
+
+  context 'search' do
+    it 'returns empty array for non-existent Actor' do
+      expect(Actor.search('Jyoti')).to eq([])
     end
   end
 
@@ -48,13 +54,6 @@ RSpec.describe Actor do
     it "has invalid date(date from future)" do
       actor = FactoryGirl.build(:actor, date_of_birth: '10-10-2020')
       expect(actor.validate_date_of_birth).to eq(['Date from future not allowed'])
-    end
-  end
-
-
-  context 'search validation' do
-    it 'should return empty array for non-existent Actor' do
-      expect(Actor.search('Jyoti')).to eq([])
     end
   end
 end
