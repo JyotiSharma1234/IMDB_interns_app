@@ -42,10 +42,15 @@ class MoviesController < ApplicationController
 
   def update
     @movie = Movie.find(params[:id])
-    if @movie.update(movie_params)
+    if(params[:actor_id])
+      @movie.actor_ids.push(params[:actor_id])
       redirect_to @movie
     else
-      render 'edit'
+      if @movie.update(movie_params)
+        redirect_to @movie
+      else
+        render 'edit'
+      end
     end
   end
 

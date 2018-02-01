@@ -16,10 +16,11 @@
         data: { confirm: 'Are you sure?' }, |
         class: 'btn btn-danger'             |
     %p= link_to 'Edit', edit_movie_path(@movie), class: 'btn btn-warning'
+
     %h4 Actors
     = form_for @movie do |form|
       %p
-        %select{ :name => "select_actor" }
+        %select{ :name => "actor_id" }
           - @actors.each do |actor|
             %option{:value => actor.id}= actor.name
       %p
@@ -28,5 +29,6 @@
       - @movie.actors.each do |cast|
         %tr
           %td= cast['name']
+
     %hr/
     = link_to 'Home', movies_path, class: 'btn btn-primary'
