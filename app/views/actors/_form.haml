@@ -8,14 +8,23 @@
       %ul
         - @actor.errors.full_messages.each do |msg|
           %li= msg
-  %p
-    = form.label :name
-    = form.text_field :name
-  %p
-    = form.label :description
-    = form.text_area :description
-  %p
-    = form.label :date_of_birth
-    = form.date_field :date_of_birth
-  %p
-    = form.submit
+
+  %table.table.table-dark
+    %tr
+      %td
+        = form.label :name
+      %td
+        = form.text_field :name
+    %tr
+      %td
+        = form.label :description
+      %td
+        = form.text_area :description
+    %tr
+      %td
+        = form.label :date_of_birth
+      %td
+        = form.date_field :date_of_birth
+    %tr
+      %td
+        = form.submit

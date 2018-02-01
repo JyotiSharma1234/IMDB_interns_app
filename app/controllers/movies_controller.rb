@@ -43,9 +43,11 @@ class MoviesController < ApplicationController
   def update
     @movie = Movie.find(params[:id])
     @actors = Actor.all
+    #for adding actor to the movie
     if(params[:actor_id])
       @movie.actors << @actors.find_by(id: params[:actor_id])
       redirect_to @movie
+    #for updating the actor
     else
       if @movie.update(movie_params)
         redirect_to @movie

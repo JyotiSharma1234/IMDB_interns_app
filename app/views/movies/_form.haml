@@ -8,17 +8,27 @@
       %ul
         - @movie.errors.full_messages.each do |msg|
           %li= msg
-  %p
-    = form.label :name
-    = form.text_field :name
-  %p
-    = form.label :description
-    = form.text_area :description
-  %p
-    = form.label :release_date
-    = form.date_field :release_date
-  %p
-    = form.label :rating
-    = form.number_field :rating
-  %p
-    = form.submit
+  %table.table.table-dark
+    %tr
+      %td
+        = form.label :name
+      %td
+        = form.text_field :name
+    %tr
+      %td
+        = form.label :description
+      %td
+        = form.text_area :description
+    %tr
+      %td
+        = form.label :release_date
+      %td
+        = form.date_field :release_date
+    %tr
+      %td
+        = form.label :rating
+      %td
+        = form.number_field :rating
+    %tr
+      %td
+        = form.submit
