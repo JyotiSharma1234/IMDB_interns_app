@@ -4,7 +4,7 @@
     %h1= @actor.name
     %p
       %b> #movies
-      \: #{@actor.casts.length}
+      \: #{@actor.movies.length}
     %p
       %b> Description
       \: #{@actor.description}
@@ -16,10 +16,10 @@
     %h4 Movies
     = link_to 'Add', nil, class: 'btn btn-sml btn-success'
     %table.table
-      - @actor.casts.each do |movie|
+      - @actor.movies.each do |movie|
         %tr
           %td= movie['name']
     %hr/
-    %hr/
+    
     = link_to 'All actors', actors_path, class: 'btn btn-primary'
     = link_to 'Home', root_path, class: 'btn btn-primary'

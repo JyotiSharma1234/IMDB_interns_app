@@ -19,7 +19,7 @@
     %h4 Actors
     = link_to 'Add', nil, class: 'btn btn-sml btn-success'
     %table.table
-      - @movie.casts.each do |cast|
+      - @movie.actors.each do |cast|
         %tr
           %td= cast['name']
     %hr/
