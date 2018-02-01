@@ -14,10 +14,9 @@
         class: 'btn btn-danger'             |
     %p= link_to 'Edit', edit_actor_path(@actor), class: 'btn btn-warning'
     %h4 Movies
-
     = form_for @actor do |form|
       %p
-        %select{ :name => "select_movie" }
+        %select{ :name => "movie_id" }
           - @movies.each do |movie|
             %option{:value => movie.id}= movie.name
       %p

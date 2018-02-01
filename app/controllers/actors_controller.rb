@@ -36,10 +36,16 @@ class ActorsController < ApplicationController
 
   def update
     @actor = Actor.find(params[:id])
-    if @actor.update(actor_params)
+    @movies = Movie.all
+    if(params[:movie_id])
+      @actor.movies << @movies.find_by(id: params[:movie_id])
       redirect_to @actor
     else
-      render 'edit'
+      if @actor.update(actor_params)
+        redirect_to @actor
+      else
+        render 'edit'
+      end
     end
   end
 
