@@ -1,4 +1,4 @@
 .container
   .jumbotron
-    %h4.card-title Edit Actor: #{@actor.name}
+    %h4.card-title Edit Actor: (#{link_to @actor.name, movie_path(@actor)})
     = render 'form'

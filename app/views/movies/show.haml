@@ -1,36 +1,37 @@
 .container
   %br/
   .jumbotron
-    %h1= @movie.name
-    .btn-group
-      %p= link_to 'Delete', movie_path(@movie), |
-          method: :delete,                    |
-          data: { confirm: 'Are you sure?' }, |
-          class: 'btn btn-danger'             |
-      %p= link_to 'Edit', edit_movie_path(@movie), class: 'btn btn-warning'
-    .card
-      .card-body
-        %p
-          %b> Rating
-          \: #{@movie.rating}
-        %p
-          %b> Release Date
-          \: #{@movie.release_date}
-        %p
-          %b> Description
-          \: #{@movie.description}
-
-
-    %h4 Actors
-    = form_for @movie do |form|
-      %p
-        %select{ :name => "actor_id" }
-          - @actors.each do |actor|
-            - unless(@movie.actors.include?(actor))
-              %option{:value => actor.id}= actor.name
-      %p
-        =form.submit "Add Actor", :class => "btn btn-success"
-    %table.table
-      - @movie.actors.each do |actor|
-        %tr
-          %td.card= link_to actor['name'], actor_path(actor)
+    .row
+      .col
+        %h1= @movie.name
+        .btn-group
+          %p= link_to 'Delete', movie_path(@movie), |
+              method: :delete,                    |
+              data: { confirm: 'Are you sure?' }, |
+              class: 'btn btn-danger'             |
+          %p= link_to 'Edit', edit_movie_path(@movie), class: 'btn btn-warning'
+        .card
+          .card-body
+            %p
+              %b> Rating
+              \: #{@movie.rating}
+            %p
+              %b> Release Date
+              \: #{@movie.release_date}
+            %p
+              %b> Description
+              \: #{@movie.description}
+      .col
+        %h4 Actors
+        = form_for @movie do |form|
+          %p
+            %select{ :name => "actor_id" }
+              - @actors.each do |actor|
+                - unless(@movie.actors.include?(actor))
+                  %option{:value => actor.id}= actor.name
+          %p
+            =form.submit "Add Actor", :class => "btn btn-success"
+        %table.table
+          - @movie.actors.each do |actor|
+            %tr
+              %td.card= link_to actor['name'], actor_path(actor)
