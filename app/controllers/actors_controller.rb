@@ -28,7 +28,7 @@ class ActorsController < ApplicationController
   def create
     @actor = Actor.new(actor_params)
     if @actor.save
-      redirect_to @actor, status: :created
+      redirect_to @actor
     else
       render 'new'
     end
