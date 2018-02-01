@@ -1,6 +1,7 @@
 class MoviesController < ApplicationController
   def new
     @movie = Movie.new
+    Movie.search(params[:id])
   end
 
   def create
