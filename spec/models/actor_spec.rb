@@ -1,31 +1,41 @@
 require 'rails_helper'
 
-RSpec.describe Actor do
-  context 'Actor validation' do
-    it 'should valid actor' do
-      actor = FactoryGirl.create(:actor)
-      expect(actor.valid?).to eq(true)
+RSpec.describe Movie do
+  context 'Movie validation' do
+    it 'should valid movie' do
+      movie = FactoryGirl.create(:movie)
+      expect(movie.valid?).to eq(true)
     end
   end
 
   context 'name validation' do
     it 'has invalid name' do
-      actor = FactoryGirl.build(:actor, :name => '')
-      expect(actor.valid?).to eq(false)
+      movie = FactoryGirl.build(:movie, :name => '')
+      movie.valid?
+      expect(movie.errors['name']).to eq(["Field cannot be empty"])
     end
   end
 
-  context 'birth date validation' do
-    it 'has invalid birth date' do
-      actor = FactoryGirl.build(:actor, :date_of_birth => '')
-      expect(actor.valid?).to eq(false)
+  context 'release date validation' do
+    it 'has invalid release date' do
+      movie = FactoryGirl.build(:movie, :release_date => '')
+      movie.valid?
+      expect(movie.errors['release_date']).to eq(["Field cannot be empty"])
     end
   end
 
   context 'description validation' do
     it 'has invalid description' do
-      actor = FactoryGirl.build(:actor, :description => 'm')
-      expect(actor.valid?).to eq(false)
+      movie = FactoryGirl.build(:movie, :description => 'm')
+      movie.valid?
+      expect(movie.errors['description']).to eq(["is too short (minimum is 6 characters)"])
+    end
+  end
+
+  context 'rating validation' do
+    it 'has invalid rating' do
+      movie = FactoryGirl.build(:movie, :rating => 6)
+      expect(movie.valid?).to eq(false)
     end
   end
   
