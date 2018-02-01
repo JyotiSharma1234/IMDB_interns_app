@@ -11,27 +11,32 @@ RSpec.describe Movie do
   context 'name validation' do
     it 'has invalid name' do
       movie = FactoryGirl.build(:movie, :name => '')
-      expect(movie.valid?).to eq(false)
+      movie.valid?
+      expect(movie.errors['name']).to eq(["Field cannot be empty"])
     end
   end
 
   context 'release date validation' do
     it 'has invalid release date' do
       movie = FactoryGirl.build(:movie, :release_date => '')
-      expect(movie.valid?).to eq(false)
+      movie.valid?
+      expect(movie.errors['release_date']).to eq(["Field cannot be empty"])
     end
   end
 
   context 'description validation' do
     it 'has invalid description' do
       movie = FactoryGirl.build(:movie, :description => 'm')
-      expect(movie.valid?).to eq(false)
+      movie.valid?
+      expect(movie.errors['description']).to eq(["is too short (minimum is 6 characters)"])
     end
   end
 
   context 'rating validation' do
     it 'has invalid rating' do
       movie = FactoryGirl.build(:movie, :rating => 6)
+      movie.valid?
+      expect(movie.errors['rating']).to eq(["is not included in the list"])
       expect(movie.valid?).to eq(false)
     end
   end

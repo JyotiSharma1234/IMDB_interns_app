@@ -11,21 +11,24 @@ RSpec.describe Actor do
   context 'name validation' do
     it 'has invalid name' do
       actor = FactoryGirl.build(:actor, :name => '')
-      expect(actor.valid?).to eq(false)
+      actor.valid?
+      expect(actor.errors['name']).to eq(["can't be blank", "Invalid"])
     end
   end
 
   context 'birth date validation' do
     it 'has invalid birth date' do
       actor = FactoryGirl.build(:actor, :date_of_birth => '')
-      expect(actor.valid?).to eq(false)
+      actor.valid?
+      expect(actor.errors['date_of_birth']).to eq(["can't be blank"])
     end
   end
 
   context 'description validation' do
     it 'has invalid description' do
       actor = FactoryGirl.build(:actor, :description => 'm')
-      expect(actor.valid?).to eq(false)
+      actor.valid?
+      expect(actor.errors['description']).to eq(["is too short (minimum is 5 characters)"])
     end
   end
   
