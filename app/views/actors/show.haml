@@ -2,17 +2,21 @@
   %br/
   .jumbotron
     %h1= @actor.name
-    %p
-      %b> #movies
-      \: #{@actor.movies.length}
-    %p
-      %b> Description
-      \: #{@actor.description}
-    %p= link_to 'Delete', actor_path(@actor), |
-        method: :delete,                    |
-        data: { confirm: 'Are you sure?' }, |
-        class: 'btn btn-danger'             |
-    %p= link_to 'Edit', edit_actor_path(@actor), class: 'btn btn-warning'
+    .btn-group
+      %p= link_to 'Delete', actor_path(@actor), |
+          method: :delete,                    |
+          data: { confirm: 'Are you sure?' }, |
+          class: 'btn btn-danger'             |
+      %p= link_to 'Edit', edit_actor_path(@actor), class: 'btn btn-warning'
+    .card
+      .card-body
+        %p
+          %b> #movies
+          \: #{@actor.movies.length}
+        %p
+          %b> Description
+          \: #{@actor.description}
+
     %h4 Movies
     = form_for @actor do |form|
       %p
@@ -21,9 +25,9 @@
             - unless(@actor.movies.include?(movie))
               %option{:value => movie.id}= movie.name
       %p
-        =form.submit "Add Movie"
+        =form.submit "Add Movie", :class => "btn btn-success"
 
     %table.table
       - @actor.movies.each do |movie|
         %tr
-          %td= link_to movie['name'], movie_path(movie)
+          %td.card= link_to movie['name'], movie_path(movie)
