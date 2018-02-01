@@ -8,7 +8,18 @@
   %body
     .container
       .btn-group
-        = link_to 'Home', root_path, class: 'btn btn-primary'
-        = link_to 'Movies', movies_path, class: 'btn btn-primary'
-        = link_to 'Actors', actors_path, class: 'btn btn-primary'
+        - if current_page?(root_path)
+          = link_to 'Home', root_path, class: 'btn btn-primary active'
+        - else
+          = link_to 'Home', root_path, class: 'btn btn-primary'
+
+        - if current_page?(movies_path)
+          = link_to 'Movies', movies_path, class: 'btn btn-primary active'
+        - else
+          = link_to 'Movies', movies_path, class: 'btn btn-primary'
+
+        - if current_page?(actors_path)
+          = link_to 'Actors', actors_path, class: 'btn btn-primary active'
+        - else
+          = link_to 'Actors', actors_path, class: 'btn btn-primary'
     = yield
