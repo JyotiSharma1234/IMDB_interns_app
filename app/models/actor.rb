@@ -19,8 +19,7 @@ class Actor < ApplicationRecord
   validate :validate_date_of_birth
 
   def self.search(search)
-    where("name LIKE ?", "%#{search}%" )
-    #where("description LIKE ?", "%#{search}%")
+    where("name LIKE ?", "%#{search}%")
   end
 
   def validate_date_of_birth

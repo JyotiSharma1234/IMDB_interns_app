@@ -31,5 +31,19 @@ RSpec.describe Actor do
       expect(actor.errors['description']).to eq(["is too short (minimum is 5 characters)"])
     end
   end
-  
+
+  context 'search validation' do
+    it 'should return all matched actors' do
+      actor = FactoryGirl.create(:actor, name: 'Pooja')
+      expect(Actor.search('Pooja')).to eq([actor])
+    end  
+  end
+
+
+  context 'search validation' do
+    it 'should return all matched actors' do
+      actor = FactoryGirl.create(:actor, name: 'Pooja')
+      expect(Actor.search('Jyoti')).to eq([])
+    end  
+  end
 end

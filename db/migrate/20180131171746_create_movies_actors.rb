@@ -6,6 +6,6 @@ class CreateMoviesActors < ActiveRecord::Migration[5.1]
      end
   end
   def self.down
-     drop_table :casts
+     drop_table :actors_movies
   end
 end

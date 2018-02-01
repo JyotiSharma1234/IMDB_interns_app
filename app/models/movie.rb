@@ -21,6 +21,5 @@ class Movie < ApplicationRecord
   
   def self.search(search)
     where("name LIKE ?", "%#{search}%" ) 
-    #where("description LIKE ?", "%#{search}%")
   end
 end

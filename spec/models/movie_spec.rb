@@ -40,4 +40,20 @@ RSpec.describe Movie do
       expect(movie.valid?).to eq(false)
     end
   end
+
+
+  context 'search validation' do
+    it 'should return all matched movies' do
+      movie = FactoryGirl.create(:movie, name: 'Bajrangi bhaijaan')
+      expect(Movie.search('bhai')).to eq([movie])
+    end  
+  end
+
+
+  context 'search validation' do
+    it 'should return []' do
+      movie = FactoryGirl.create(:movie, name: 'Bajrangi bhaijaan')
+      expect(Movie.search('hello')).to eq([])
+    end  
+  end
 end
