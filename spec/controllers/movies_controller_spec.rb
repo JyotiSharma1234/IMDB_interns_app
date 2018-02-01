@@ -1,8 +1,9 @@
 require 'rails_helper'
 require 'pry'
-RSpec.describe ActorsController do
+
+RSpec.describe MoviesController do
   before(:each) do
-    @actor = FactoryGirl.create(:actor)
+    @movie = FactoryGirl.create(:movie)
   end
 
   describe 'GET #index' do
@@ -20,7 +21,7 @@ RSpec.describe ActorsController do
 
   describe 'POST #create' do
     before(:each) do
-      post :create, params: {actor: {name: 'ajay', date_of_birth: '1-1-2010', description: 'hveurbvebvu'}}, format: :json
+      post :create, params: {movie: { name: 'singham',  description: 'hveurbvebvu',rating: '5', release_date: '1-1-2010' } }, format: :json
     end
     it 'renders html' do
        expect(response.content_type).to eq('text/html')
@@ -39,17 +40,18 @@ RSpec.describe ActorsController do
   describe "PATCH #update" do
    context "with good data" do
      it "updates the actor and redirects" do
-       patch :update, params: { id: @actor.id , actor: { name: "xyz", date_of_birth: '1-1-2010', description: 'hveurbvebvu'}}
+       patch :update, params: { id: @movie.id , movie: { name: 'welcome',  description: 'hveurbvebvu',rating: '5', release_date: '1-1-2010' }}
        expect(response).to be_redirect
      end
    end
    context "with bad data" do
      it "does not change the actor, and re-renders the form" do
-       patch :update, params: { id: @actor.id, actor: { name: "xyz", date_of_birth: '1-1-2010', description: 'h'}}
+       patch :update, params: { id: @movie.id, movie: { name: 'welcome',  description: 'hv',rating: '5', release_date: '1-1-2010' }}
        expect(response).not_to be_redirect
      end
    end
   end
+
 
   describe "DELETE #destroy" do
     before(:each) do
@@ -59,8 +61,8 @@ RSpec.describe ActorsController do
       expect(response.status).to eq(302)
     end
     it 'returns nil for deleted object' do
-      @actor = Actor.find_by(id: 1)
-      expect(@actor).to be_falsey
+      @movie = Movie.find_by(id: 1)
+      expect(@movie).to be_falsey
     end
   end
 end
