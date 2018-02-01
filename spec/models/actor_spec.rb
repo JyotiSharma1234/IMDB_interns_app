@@ -28,4 +28,5 @@ RSpec.describe Actor do
       expect(actor.valid?).to eq(false)
     end
   end
+  
 end
