@@ -22,7 +22,8 @@
       %p
         %select{ :name => "actor_id" }
           - @actors.each do |actor|
-            %option{:value => actor.id}= actor.name
+            - unless(@movie.actors.include?(actor))
+              %option{:value => actor.id}= actor.name
       %p
         =form.submit "Add Actor"
     %table.table

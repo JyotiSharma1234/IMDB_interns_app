@@ -18,7 +18,8 @@
       %p
         %select{ :name => "movie_id" }
           - @movies.each do |movie|
-            %option{:value => movie.id}= movie.name
+            - unless(@actor.movies.include?(movie))
+              %option{:value => movie.id}= movie.name
       %p
         =form.submit "Add Movie"
 
