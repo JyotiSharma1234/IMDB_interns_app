@@ -14,10 +14,14 @@
     %table.table
       %th Name
       %th Rating
+      %th #Actors
+      %th Release Date
       - @movies.each do |movie|
         %tr
           %td= link_to(movie.name, movie_path(movie))
           %td= movie.rating
+          %td= movie.actors.length
+          %td= movie.release_date
           %td= link_to 'Delete', movie_path(movie),  |
               method: :delete,                    |
               data: { confirm: 'Are you sure?' }, |
