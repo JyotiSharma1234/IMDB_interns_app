@@ -23,6 +23,6 @@ class Actor < ApplicationRecord
   end
 
   def validate_date_of_birth
-    errors.add("data_of_birth", "(Dates from future not allowed!)") if date_of_birth &&  date_of_birth > Time.now
+    errors.add("data_of_birth", "Date from future not allowed") if date_of_birth &&  date_of_birth > Time.now
   end
 end

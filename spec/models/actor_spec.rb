@@ -32,10 +32,22 @@ RSpec.describe Actor do
     end
   end
 
-  context 'search validation' do
+  context 'search' do
     it 'should return all matched actors' do
       actor = FactoryGirl.create(:actor, name: 'Pooja')
       expect(Actor.search('Pooja')).to eq([actor])
+    end
+  end
+
+  context 'date_of_birth' do
+    it 'has valid date' do
+      actor = FactoryGirl.build(:actor)
+      expect(actor.validate_date_of_birth).to eq(nil)
+    end
+
+    it "has invalid date(date from future)" do
+      actor = FactoryGirl.build(:actor, date_of_birth: '10-10-2020')
+      expect(actor.validate_date_of_birth).to eq(['Date from future not allowed'])
     end
   end
 
