@@ -36,14 +36,13 @@ RSpec.describe Actor do
     it 'should return all matched actors' do
       actor = FactoryGirl.create(:actor, name: 'Pooja')
       expect(Actor.search('Pooja')).to eq([actor])
-    end  
+    end
   end
 
 
   context 'search validation' do
-    it 'should return all matched actors' do
-      actor = FactoryGirl.create(:actor, name: 'Pooja')
+    it 'should return empty array for non-existent Actor' do
       expect(Actor.search('Jyoti')).to eq([])
-    end  
+    end
   end
 end
