@@ -27,6 +27,6 @@
       %p
         =form.submit "Add Actor"
     %table.table
-      - @movie.actors.each do |cast|
+      - @movie.actors.each do |actor|
         %tr
-          %td= cast['name']
+          %td= link_to actor['name'], actor_path(actor)
