@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Movie do
-  context 'Movie validation' do
+  context 'Movie' do
     it 'should valid movie' do
       movie = FactoryGirl.create(:movie)
       expect(movie.valid?).to eq(true)
     end
   end
 
-  context 'name validation' do
+  context 'name' do
     it 'has invalid name' do
       movie = FactoryGirl.build(:movie, :name => '')
       movie.valid?
@@ -16,15 +16,15 @@ RSpec.describe Movie do
     end
   end
 
-  context 'release date validation' do
+  context 'release_date' do
     it 'has invalid release date' do
-      movie = FactoryGirl.build(:movie, :release_date => '')
+        movie = FactoryGirl.build(:movie, :release_date => '')
       movie.valid?
       expect(movie.errors['release_date']).to eq(["Field cannot be empty"])
     end
   end
 
-  context 'description validation' do
+  context 'description' do
     it 'has invalid description' do
       movie = FactoryGirl.build(:movie, :description => 'm')
       movie.valid?
@@ -32,7 +32,7 @@ RSpec.describe Movie do
     end
   end
 
-  context 'rating validation' do
+  context 'rating' do
     it 'has invalid rating' do
       movie = FactoryGirl.build(:movie, :rating => 6)
       movie.valid?
@@ -64,14 +64,14 @@ RSpec.describe Movie do
   end
 
 
-  context 'search validation' do
+  context 'search' do
     it 'should return all matched movies' do
       movie = FactoryGirl.create(:movie, name: 'Bajrangi bhaijaan')
       expect(Movie.search('bhai')).to eq([movie])
-    end  
-  
+    end
+
     it 'should return [] for non existing movie' do
       expect(Movie.search('hello')).to eq([])
-    end  
+    end
   end
 end
