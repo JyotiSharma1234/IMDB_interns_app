@@ -1,5 +1,5 @@
 .container
-  %br/
+  %br
   .jumbotron
     .row
       .col
@@ -8,13 +8,11 @@
           %p= link_to 'Delete', actor_path(@actor), |
               method: :delete,                    |
               data: { confirm: 'Are you sure?' }, |
-              class: 'btn btn-danger'             |
+              class: 'btn btn-danger',            |
+              style: 'margin-right: 20px'
           %p= link_to 'Edit', edit_actor_path(@actor), class: 'btn btn-warning'
         .card
           .card-body
-            %p
-              %b> #movies
-              \: #{@actor.movies.length}
             %p
               %b> Description
               \: #{@actor.description}
