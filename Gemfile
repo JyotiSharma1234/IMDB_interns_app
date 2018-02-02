@@ -44,7 +44,7 @@ gem 'haml-rails', "~> 1.0"
 
 gem 'rails-controller-testing'
 
-gem 'pg'
+gem 'pg', '~> 0.18'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
