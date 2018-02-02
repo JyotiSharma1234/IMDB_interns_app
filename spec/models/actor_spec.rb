@@ -12,13 +12,13 @@ RSpec.describe Actor do
     it 'is blank' do
       actor = FactoryGirl.build(:actor, :name => '')
       actor.valid?
-      expect(actor.errors['name']).to eq(["can't be blank", "Invalid"])
+      expect(actor.errors['name']).to eq(["can't be blank", " : Invalid format"])
     end
 
     it 'has invalid name with numbers' do
       actor = FactoryGirl.build(:actor, :name => '33aa')
       actor.valid?
-      expect(actor.errors['name']).to eq(["Invalid"])
+      expect(actor.errors['name']).to eq([" : Invalid format"])
     end
   end
 
@@ -41,7 +41,7 @@ RSpec.describe Actor do
   end
 
   context 'description' do
-    it 'is invalid ' do
+    it 'length is less than 5 characters ' do
       actor = FactoryGirl.build(:actor, :description => 'm')
       actor.valid?
       expect(actor.errors['description']).to eq(["is too short (minimum is 5 characters)"])
@@ -49,13 +49,26 @@ RSpec.describe Actor do
   end
 
   context 'search' do
-    it 'returns all matched actors' do
-      actor = FactoryGirl.create(:actor, name: 'Pooja')
-      expect(Actor.search('Pooja')).to eq([actor])
+    before(:each) do
+      @actor1 = FactoryGirl.create(:actor, name: 'Ranveer singh')
+      @actor2 = FactoryGirl.create(:actor, name: 'Ranveer kapoor')
+      @actor3 = FactoryGirl.create(:actor, name: 'Shahid kapoor')
     end
-  
-    it 'returns empty array for non-existent Actor' do
-      expect(Actor.search('Jyoti')).to eq([])
+
+    after(:each) do
+      DatabaseCleaner.clean
+    end
+    
+    it 'should return all matched actors' do
+      expect(Actor.search('kapoor')).to eq([@actor2,@actor3])
+    end
+
+    it 'should return [] for non existing actor' do
+      expect(Actor.search('yadav')).to eq([])
+    end
+
+    it 'should return all actor if search parameter is empty' do
+      expect(Actor.search('')).to eq([@actor1,@actor2,@actor3])
     end
   end
 end

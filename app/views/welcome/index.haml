@@ -26,7 +26,7 @@
       %h3 Movies
       - unless @movie_results.present?
         .alert.alert-warning
-          There are no movies matching '#{params[:search]}'
+          There are no movies matching '#{params[:search_term]}'
         %br
       - else
         %table.table

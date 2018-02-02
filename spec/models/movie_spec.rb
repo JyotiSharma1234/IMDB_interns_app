@@ -12,7 +12,7 @@ RSpec.describe Movie do
     it 'has invalid name' do
       movie = FactoryGirl.build(:movie, :name => '')
       movie.valid?
-      expect(movie.errors['name']).to eq(["Field cannot be empty"])
+      expect(movie.errors['name']).to eq([" : Field cannot be empty"])
     end
   end
 
@@ -20,7 +20,7 @@ RSpec.describe Movie do
     it 'has invalid release date' do
         movie = FactoryGirl.build(:movie, :release_date => '')
       movie.valid?
-      expect(movie.errors['release_date']).to eq(["Field cannot be empty"])
+      expect(movie.errors['release_date']).to eq([" : Field cannot be empty"])
     end
   end
 
@@ -36,21 +36,21 @@ RSpec.describe Movie do
     it 'has invalid rating' do
       movie = FactoryGirl.build(:movie, :rating => 6)
       movie.valid?
-      expect(movie.errors['rating']).to eq(["is not included in the list"])
+      expect(movie.errors['rating']).to eq([" : Rating must be between 0 to 5"])
       expect(movie.valid?).to eq(false)
     end
 
     it 'has negative rating' do
       movie = FactoryGirl.build(:movie, :rating => -2)
       movie.valid?
-      expect(movie.errors['rating']).to eq(["is not included in the list"])
+      expect(movie.errors['rating']).to eq([" : Rating must be between 0 to 5"])
       expect(movie.valid?).to eq(false)
     end
 
     it 'has invalid rating in decimal' do
       movie = FactoryGirl.build(:movie, :rating => 6.5)
       movie.valid?
-      expect(movie.errors['rating']).to eq(["is not included in the list"])
+      expect(movie.errors['rating']).to eq([" : Rating must be between 0 to 5"])
       expect(movie.valid?).to eq(false)
     end
 
