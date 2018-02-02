@@ -9,17 +9,18 @@
       = text_field_tag :search, params[:search], placeholder: "Search Actor"
       = submit_tag "Search", name: nil
     - unless @actors.present?
-      %p
-      There are no actor with #{params[:search]} name.
-    %table.table.table-blue
-      %th Name
-      %th Number of movies
-      - @actors.each do |actor|
-        %tr
-          %td= link_to(actor.name, actor_path(actor))
-          %td= actor.movies.length
-          %td= link_to 'Delete', actor_path(actor),  |
-              method: :delete,                    |
-              data: { confirm: 'Are you sure?' }, |
-              class: "btn btn-danger"             |
-          %td= link_to 'Edit', edit_actor_path(actor), class: 'btn btn-warning'
+      .alert.alert-warning
+        There are no actors matching '#{params[:search]}'
+    - else
+      %table.table.table-blue
+        %th Name
+        %th Number of movies
+        - @actors.each do |actor|
+          %tr
+            %td= link_to(actor.name, actor_path(actor))
+            %td= actor.movies.length
+            %td= link_to 'Delete', actor_path(actor),  |
+                method: :delete,                    |
+                data: { confirm: 'Are you sure?' }, |
+                class: "btn btn-danger"             |
+            %td= link_to 'Edit', edit_actor_path(actor), class: 'btn btn-warning'

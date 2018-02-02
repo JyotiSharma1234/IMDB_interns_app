@@ -7,8 +7,8 @@
     - if params[:search_term]
       %h3 Actors:
       - unless @actor_results.present?
-        %p
-        There are no actors with '#{params[:search_term]}' name.
+        .alert.alert-warning
+          There are no actors matching '#{params[:search_term]}'
       - else
         %table.table
           %th Name
@@ -25,8 +25,8 @@
       %hr
       %h3 Movies
       - unless @movie_results.present?
-        %p
-        There are no movies containing the term(s) #{params[:search]}.
+        .alert.alert-warning
+          There are no movies matching '#{params[:search]}'
         %br
       - else
         %table.table
