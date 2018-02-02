@@ -16,10 +16,10 @@ class Movie < ApplicationRecord
   has_and_belongs_to_many :actors
   #has_and_belongs_to_many :casts, :join_table => "casts", :class_name => "Actor"
   validates :name, :release_date, :description, :rating, presence: { message: 'Field cannot be empty'}
-  validates :description, length: { in: 6...100 }
+  validates :description, length: { in: 6...500 }
   validates_inclusion_of :rating, :in => 0..5
-  
+
   def self.search(search)
-    where("name LIKE ?", "%#{search}%" ) 
+    where("name LIKE ?", "%#{search}%" )
   end
 end

@@ -15,7 +15,7 @@ class Actor < ApplicationRecord
   #has_and_belongs_to_many :casts, :join_table => "casts", :class_name => "Movie"
   validates :name, presence: true, format: { with: /\A[a-zA-Z ]+\z/, message: 'Invalid' }
   validates :date_of_birth, presence: true
-  validates :description, presence: true, length: { in: 5..100 }
+  validates :description, presence: true, length: { in: 5..500 }
   validate :validate_date_of_birth
 
   def self.search(search)
