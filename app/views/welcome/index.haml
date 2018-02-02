@@ -1,6 +1,48 @@
 .container
   .jumbotron
     %h1 IMDB
-    = link_to 'Movies', movies_path, class: 'btn btn-primary'
-    = link_to 'Actors', actors_path, class: 'btn btn-primary'
-    %br
+    %h3 Search
+    = form_for('welcome#index', :method => "get", id: "search-form") do
+      = text_field_tag :search_term, params[:search_term], placeholder: "Search"
+      = submit_tag "Search", name: nil
+    - if params[:search_term]
+      %h3 Actors:
+      - unless @actor_results.present?
+        %p
+        There are no actors with '#{params[:search_term]}' name.
+      - else
+        %table.table
+          %th Name
+          %th Number of movies
+          - @actor_results.each do |actor|
+            %tr
+              %td= link_to(actor.name, actor_path(actor))
+              %td= actor.movies.length
+              %td= link_to 'Delete', actor_path(actor),  |
+                  method: :delete,                    |
+                  data: { confirm: 'Are you sure?' }, |
+                  class: "btn btn-danger"             |
+              %td= link_to 'Edit', edit_actor_path(actor), class: 'btn btn-warning'
+      %hr
+      %h3 Movies
+      - unless @movie_results.present?
+        %p
+        There are no movies containing the term(s) #{params[:search]}.
+        %br
+      - else
+        %table.table
+          %th Name
+          %th Rating
+          %th #Actors
+          %th Release Date
+          - @movie_results.each do |movie|
+            %tr
+              %td= link_to(movie.name, movie_path(movie))
+              %td= movie.rating
+              %td= movie.actors.length
+              %td= movie.release_date
+              %td= link_to 'Delete', movie_path(movie),  |
+                  method: :delete,                    |
+                  data: { confirm: 'Are you sure?' }, |
+                  class: "btn btn-danger"             |
+              %td= link_to 'Edit', edit_movie_path(movie), class: 'btn btn-warning'
