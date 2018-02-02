@@ -40,6 +40,12 @@ RSpec.describe Movie do
       expect(movie.valid?).to eq(false)
     end
 
+    it 'has negative rating' do
+      movie = FactoryGirl.build(:movie, :rating => -2)
+      movie.valid?
+      expect(movie.errors['rating']).to eq(["is not included in the list"])
+      expect(movie.valid?).to eq(false)
+    end
 
     it 'has invalid rating in decimal' do
       movie = FactoryGirl.build(:movie, :rating => 6.5)

@@ -21,7 +21,7 @@ RSpec.describe MoviesController do
 
   describe 'POST #create' do
     before(:each) do
-      post :create, params: {movie: { name: 'singham',  description: 'hveurbvebvu',rating: '5', release_date: '1-1-2010' } }, format: :json
+      post :create, params: {movie: { name: 'singham',  description: 'bollywood action movie',rating: '5', release_date: '1-1-2010' } }, format: :json
     end
     it 'renders html' do
        expect(response.content_type).to eq('text/html')
@@ -38,13 +38,13 @@ RSpec.describe MoviesController do
   end
 
   describe "PATCH #update" do
-   context "with good data" do
+   context "with valid data" do
      it "updates the actor and redirects" do
-       patch :update, params: { id: @movie.id , movie: { name: 'welcome',  description: 'hveurbvebvu',rating: '5', release_date: '1-1-2010' }}
+       patch :update, params: { id: @movie.id , movie: { name: 'welcome',  description: 'bollywood comedy movie',rating: '5', release_date: '1-1-2010' }}
        expect(response).to be_redirect
      end
    end
-   context "with bad data" do
+   context "with invalid data" do
      it "does not change the actor, and re-renders the form" do
        patch :update, params: { id: @movie.id, movie: { name: 'welcome',  description: 'hv',rating: '5', release_date: '1-1-2010' }}
        expect(response).not_to be_redirect
