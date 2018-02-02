@@ -11,7 +11,7 @@
     - unless @actors.present?
       %p
       There are no actor with #{params[:search]} name.
-    %table.table
+    %table.table.table-blue
       %th Name
       %th Number of movies
       - @actors.each do |actor|
