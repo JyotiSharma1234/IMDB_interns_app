@@ -14,7 +14,6 @@ group :development do
 end
 
 group :production do
-  gem 'pg'
   gem "activerecord-postgresql-adapter"
 end
 
@@ -44,6 +43,8 @@ gem 'bootstrap', '~> 4.0.0'
 gem 'haml-rails', "~> 1.0"
 
 gem 'rails-controller-testing'
+
+gem 'pg'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
