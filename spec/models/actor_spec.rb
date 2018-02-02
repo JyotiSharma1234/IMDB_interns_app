@@ -9,10 +9,16 @@ RSpec.describe Actor do
   end
 
   context 'name' do
-    it 'has invalid name' do
+    it 'is blank' do
       actor = FactoryGirl.build(:actor, :name => '')
       actor.valid?
       expect(actor.errors['name']).to eq(["can't be blank", "Invalid"])
+    end
+
+    it 'has invalid name with numbers' do
+      actor = FactoryGirl.build(:actor, :name => '33aa')
+      actor.valid?
+      expect(actor.errors['name']).to eq(["Invalid"])
     end
   end
 
