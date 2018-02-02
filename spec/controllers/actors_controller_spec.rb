@@ -20,7 +20,7 @@ RSpec.describe ActorsController do
 
   describe 'POST #create' do
     before(:each) do
-      post :create, params: {actor: {name: 'ajay', date_of_birth: '1-1-2010', description: 'hveurbvebvu'}}, format: :json
+      post :create, params: {actor: {name: 'ajay', date_of_birth: '1-1-2010', description: 'very talented actor'}}, format: :json
     end
     it 'renders html' do
        expect(response.content_type).to eq('text/html')
@@ -37,13 +37,13 @@ RSpec.describe ActorsController do
   end
 
   describe "PATCH #update" do
-   context "with good data" do
+   context "with valid data" do
      it "updates the actor and redirects" do
        patch :update, params: { id: @actor.id , actor: { name: "xyz", date_of_birth: '1-1-2010', description: 'hveurbvebvu'}}
        expect(response).to be_redirect
      end
    end
-   context "with bad data" do
+   context "with invalid data" do
      it "does not change the actor, and re-renders the form" do
        patch :update, params: { id: @actor.id, actor: { name: "xyz", date_of_birth: '1-1-2010', description: 'h'}}
        expect(response).not_to be_redirect

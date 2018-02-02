@@ -1,5 +1,5 @@
 require 'rails_helper'
-
+require 'database_cleaner'
 RSpec.describe Movie do
   context 'Movie' do
     it 'should valid movie' do
@@ -69,15 +69,27 @@ RSpec.describe Movie do
     end
   end
 
-
   context 'search' do
+    before(:each) do
+      @movie1 = FactoryGirl.create(:movie, name: 'Bajrangi bhaijaan')
+      @movie2 = FactoryGirl.create(:movie, name: 'Hello bhaijaan')
+      @movie3 = FactoryGirl.create(:movie, name: 'Bajrangi')
+    end
+
+    after(:each) do
+      DatabaseCleaner.clean
+    end
+    
     it 'should return all matched movies' do
-      movie = FactoryGirl.create(:movie, name: 'Bajrangi bhaijaan')
-      expect(Movie.search('bhai')).to eq([movie])
+      expect(Movie.search('bhai')).to eq([@movie1,@movie2])
     end
 
     it 'should return [] for non existing movie' do
-      expect(Movie.search('hello')).to eq([])
+      expect(Movie.search('hero')).to eq([])
+    end
+
+    it 'should return all movie if search parameter is empty' do
+      expect(Movie.search('')).to eq([@movie1,@movie2,@movie3])
     end
   end
 end
