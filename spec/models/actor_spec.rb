@@ -17,15 +17,25 @@ RSpec.describe Actor do
   end
 
   context 'birth date' do
-    it 'has invalid birth date' do
+    it 'has blank birth date' do
       actor = FactoryGirl.build(:actor, :date_of_birth => '')
       actor.valid?
       expect(actor.errors['date_of_birth']).to eq(["can't be blank"])
     end
+
+    it 'has valid date' do
+      actor = FactoryGirl.build(:actor)
+      expect(actor.validate_date_of_birth).to eq(nil)
+    end
+
+    it "has invalid date(date from future)" do
+      actor = FactoryGirl.build(:actor, date_of_birth: '10-10-2020')
+      expect(actor.validate_date_of_birth).to eq(['Date from future not allowed'])
+    end
   end
 
   context 'description' do
-    it 'has invalid description' do
+    it 'is invalid ' do
       actor = FactoryGirl.build(:actor, :description => 'm')
       actor.valid?
       expect(actor.errors['description']).to eq(["is too short (minimum is 5 characters)"])
@@ -37,23 +47,9 @@ RSpec.describe Actor do
       actor = FactoryGirl.create(:actor, name: 'Pooja')
       expect(Actor.search('Pooja')).to eq([actor])
     end
-  end
-
-  context 'search' do
+  
     it 'returns empty array for non-existent Actor' do
       expect(Actor.search('Jyoti')).to eq([])
-    end
-  end
-
-  context 'date_of_birth' do
-    it 'has valid date' do
-      actor = FactoryGirl.build(:actor)
-      expect(actor.validate_date_of_birth).to eq(nil)
-    end
-
-    it "has invalid date(date from future)" do
-      actor = FactoryGirl.build(:actor, date_of_birth: '10-10-2020')
-      expect(actor.validate_date_of_birth).to eq(['Date from future not allowed'])
     end
   end
 end
