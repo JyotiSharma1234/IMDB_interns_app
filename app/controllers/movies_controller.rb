@@ -45,7 +45,7 @@ class MoviesController < ApplicationController
     @actors = Actor.all
     #for adding actor to the movie
     if(params[:actor_id])
-      @movie.actors << @actors.find_by(id: params[:actor_id])
+      @movie.actors << Actor.find(params[:actor_id])
       redirect_to @movie
     #for updating the actor
     else
@@ -64,6 +64,7 @@ class MoviesController < ApplicationController
   end
 
   private
+  
   def movie_params
     params.require(:movie).permit(:name, :description, :rating, :release_date)
   end
