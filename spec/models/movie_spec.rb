@@ -39,6 +39,28 @@ RSpec.describe Movie do
       expect(movie.errors['rating']).to eq(["is not included in the list"])
       expect(movie.valid?).to eq(false)
     end
+
+
+    it 'has invalid rating in decimal' do
+      movie = FactoryGirl.build(:movie, :rating => 6.5)
+      movie.valid?
+      expect(movie.errors['rating']).to eq(["is not included in the list"])
+      expect(movie.valid?).to eq(false)
+    end
+
+    it 'has valid rating in decimal' do
+      movie = FactoryGirl.build(:movie, :rating => 3.5)
+      movie.valid?
+      expect(movie.errors['rating']).to eq([])
+      expect(movie.valid?).to eq(true)
+    end
+
+    it 'has valid rating' do
+      movie = FactoryGirl.build(:movie, :rating => 3)
+      movie.valid?
+      expect(movie.errors['rating']).to eq([])
+      expect(movie.valid?).to eq(true)
+    end
   end
 
 
@@ -47,12 +69,8 @@ RSpec.describe Movie do
       movie = FactoryGirl.create(:movie, name: 'Bajrangi bhaijaan')
       expect(Movie.search('bhai')).to eq([movie])
     end  
-  end
-
-
-  context 'search validation' do
-    it 'should return []' do
-      movie = FactoryGirl.create(:movie, name: 'Bajrangi bhaijaan')
+  
+    it 'should return [] for non existing movie' do
       expect(Movie.search('hello')).to eq([])
     end  
   end
